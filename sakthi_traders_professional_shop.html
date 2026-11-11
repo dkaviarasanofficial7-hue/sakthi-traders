@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAKTHI TRADERS | Earrings Store</title>
+<style>
+:root{--wine:#650000;--red:#a90016;--gold:#e8bd55;--cream:#fff8f0;--ink:#242124;--muted:#777}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(120deg,#3d0000,#9c0014,#4a0000);color:white;padding:24px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:4px solid var(--gold)}
+.brand h1{font-size:clamp(24px,4vw,36px);color:var(--gold);letter-spacing:2px}
+.brand p{font-size:13px;color:#ffe9c0}
+.header-cart{background:#fff;color:var(--wine);border:0;border-radius:30px;padding:11px 17px;font-weight:bold;cursor:pointer}
+nav{position:sticky;top:0;z-index:10;background:#fff;box-shadow:0 4px 15px #0001;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px}
+nav a{color:var(--wine);text-decoration:none;font-weight:bold;padding:8px 13px;border-radius:20px}
+nav a:hover{background:#fff0d0}
+.hero{padding:60px 6%;background:linear-gradient(135deg,#fff0d5,#fff 60%,#ffe5e5);display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:25px}
+.hero h2{font-size:clamp(30px,5vw,48px);color:var(--wine);line-height:1.1;margin-bottom:14px}
+.hero p{color:#5d5151;max-width:560px;margin-bottom:20px}
+.hero-badge{background:linear-gradient(135deg,#740000,#b90021);color:#fff;border:2px solid var(--gold);padding:25px;border-radius:24px;text-align:center;box-shadow:0 12px 35px #65000025}
+.hero-badge strong{display:block;font-size:30px;color:var(--gold)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:12px 18px;background:linear-gradient(135deg,#a90016,#650000);color:#fff;font-weight:bold;cursor:pointer;text-decoration:none;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 18px #65000030}
+.btn.gold{background:linear-gradient(135deg,#f3d47b,#d9a82c);color:#4b0000}
+section{padding:48px 5%}
+.section-head{text-align:center;margin-bottom:26px}
+.section-head h2{font-size:30px;color:var(--wine)}
+.section-head p{color:var(--muted)}
+.toolbar{max-width:1200px;margin:0 auto 22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between}
+.toolbar input,.toolbar select{padding:12px;border:1px solid #e2c77b;border-radius:10px;background:#fff;min-width:180px;flex:1}
+.products{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:white;border:1px solid #ead8a5;border-radius:18px;padding:17px;box-shadow:0 6px 20px #4b000010;transition:.25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 26px #65000020}
+.card img{width:100%;height:190px;object-fit:contain;background:#fffaf1;border-radius:12px}
+.card h3{color:#720000;font-size:17px;margin:13px 0 6px}
+.card p{font-size:13px;color:#777;min-height:40px}
+.price{font-size:23px;font-weight:800;color:#a90016;margin:10px 0}
+.card button{margin-top:auto}
+.panel{max-width:1000px;margin:auto;background:#fff;border-radius:18px;padding:25px;box-shadow:0 8px 28px #65000012;border:1px solid #ead8a5}
+#cart{background:#fff2dc}
+.cart-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #eee}
+.qty button{padding:5px 10px;border:0;border-radius:6px;background:#f3dfb3;cursor:pointer}
+.remove{border:0;background:none;color:#b00020;cursor:pointer;font-weight:bold}
+.cart-empty{text-align:center;padding:20px;color:#777}
+.cart-bottom{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-top:20px}
+.total{font-size:26px;font-weight:bold;color:var(--wine)}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{margin-bottom:15px}
+label{display:block;font-weight:bold;color:#650000;margin-bottom:6px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #dfc77c;border-radius:9px;font:inherit;background:#fff}
+textarea{min-height:90px;resize:vertical}
+.order-summary{background:#fff8e8;border-radius:12px;padding:15px;margin-bottom:18px}
+.notice{display:none;padding:15px;border-radius:10px;background:#e9f8e9;color:#17622a;margin-bottom:15px}
+footer{background:#430000;color:white;text-align:center;padding:30px 15px;border-top:4px solid var(--gold)}
+footer strong{color:var(--gold)}
+@media(max-width:700px){.hero{grid-template-columns:1fr;padding:42px 5%}.hero-badge{max-width:360px}.checkout-grid{grid-template-columns:1fr}.cart-row{grid-template-columns:1fr; text-align:center}.cart-bottom{justify-content:center}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><h1>SAKTHI TRADERS</h1><p>Elegant earrings • Everyday style • Affordable prices</p></div>
+  <button class="header-cart" onclick="scrollToCart()">🛒 Cart <span id="cartCount">0</span></button>
+</header>
+<nav>
+  <a href="sakthi_trader_homepage.html">Home</a><a href="sakthi_trader_homepage.html">Shop Earrings</a><a href="#cart">Shopping Cart</a><a href="#checkout">Checkout</a><a href="#contact">Contact</a>
+</nav>
+<main>
+<section class="hero" id="home">
+  <div><h2>Find your shine.<br>Wear your style.</h2><p>Explore our beautiful earring collection and choose your favourite design. Add products to your cart, review your order, and complete the checkout form.</p><a class="btn" href="#products">Shop Collection →</a></div>
+  <div class="hero-badge"><strong>SAKTHI</strong><span>TRADERS</span><p style="color:#fff;margin:8px 0 0">A little sparkle for every occasion ✨</p></div>
+</section>
+<section id="products">
+  <div class="section-head"><h2>Our Earring Collection</h2><p>Choose your favourite style and add it to your shopping cart.</p></div>
+  <div class="toolbar"><input id="search" type="search" placeholder="Search earrings..." oninput="renderProducts()"><select id="sort" onchange="renderProducts()"><option value="default">Sort: Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select></div>
+  <div class="products" id="productGrid"></div>
+</section>
+<section id="cart">
+  <div class="section-head"><h2>🛒 My Shopping Cart</h2><p>Review items and quantity before proceeding to checkout.</p></div>
+  <div class="panel"><div id="cartItems"><p class="cart-empty">Your cart is empty. Add earrings from the collection.</p></div>
+    <div class="cart-bottom"><div class="total">Total: ₹<span id="total">0</span></div><div><button class="btn gold" onclick="clearCart()">Clear Cart</button> <button class="btn" onclick="proceedToCheckout()">Proceed to Order →</button></div></div>
+  </div>
+</section>
+<section id="checkout">
+  <div class="section-head"><h2>Checkout & Place Order</h2><p>Enter your delivery details to review and place your order.</p></div>
+  <div class="panel">
+    <div class="notice" id="successNotice"></div>
+    <div class="order-summary"><strong>Order Summary</strong><div id="checkoutSummary">Your cart is empty.</div><strong>Total: ₹<span id="checkoutTotal">0</span></strong></div>
+    <form id="orderForm">
+      <div class="checkout-grid">
+        <div class="field"><label for="customerName">Full Name *</label><input id="customerName" required autocomplete="name" placeholder="Enter your full name"></div>
+        <div class="field"><label for="mobile">Mobile Number *</label><input id="mobile" required type="tel" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number"></div>
+        <div class="field"><label for="email">Email (optional)</label><input id="email" type="email" placeholder="you@example.com"></div>
+        <div class="field"><label for="payment">Payment Method *</label><select id="payment" required><option value="">Choose payment</option><option>Cash on Delivery</option><option>UPI (pay directly with seller)</option></select></div>
+      </div>
+      <div class="field"><label for="address">Delivery Address *</label><textarea id="address" required placeholder="House / street, area, city, state, PIN code"></textarea></div>
+      <div class="cart-bottom"><button type="button" class="btn gold" onclick="scrollToCart()">← Back to Cart</button><button type="submit" class="btn">Place Order ✓</button></div>
+    </form>
+  </div>
+</section>
+<section id="contact">
+  <div class="section-head"><h2>Contact Sakthi Traders</h2><p>For product and order enquiries, contact the store directly.</p></div>
+  <div class="panel" style="text-align:center"><p><strong>SAKTHI TRADERS</strong></p><p>Online Earring Shopping Store</p><p>Quality Products | Affordable Prices | Happy Shopping</p></div>
+</section>
+</main>
+<footer><strong>SAKTHI TRADERS</strong><p>Thank you for shopping with us ✨</p><p>Copyright © 2026 Sakthi Traders. All rights reserved.</p></footer>
+<script>
+const products=[
+{id:1,name:"Crystal Cherry Heart Stud Earrings",description:"Korean style asymmetric cherry heart earrings",price:33,image:"08.png"},
+{id:2,name:"Gold-Plated Crystal Butterfly Stud Earrings",description:"Faceted rhinestone butterfly shaped earrings",price:33,image:"120.png"},
+{id:3,name:"Silver-Plated Pearl and Crystal Cherry Stud Earrings",description:"Korean crystal cherry drop studs with faux pearls",price:33,image:"110.png"},
+{id:4,name:"Rose Gold Pink Cat Eye Flower C-Hoop Earrings",description:"Rose gold floral rhinestone J-hoop earrings",price:44,image:"01.png"},
+{id:5,name:"Antique Gold-Plated Emerald Green Jhumka Earrings",description:"Oxidized gold temple jhumkas with floral bell design",price:77,image:"009.png"},
+{id:6,name:"Antique Gold-Plated Emerald Brown Jhumka Earrings",description:"Oxidized gold temple jhumkas with floral bell design",price:77,image:"03.png"},
+{id:7,name:"Antique Gold-Plated Emerald Blue Jhumka Earrings",description:"Oxidized gold temple jhumkas with floral bell design",price:77,image:"05.png"},
+{id:8,name:"Antique Gold-Plated Emerald Pink Jhumka Earrings",description:"Oxidized gold temple jhumkas with floral bell design",price:77,image:"008.png"},
+{id:9,name:"Antique Gold-Plated Emerald Sky Blue Jhumka Earrings",description:"Oxidized gold temple jhumkas with floral bell design",price:77,image:"007.png"}
+];
+let cart={};
+function renderProducts(){
+ let q=document.getElementById("search").value.toLowerCase();
+ let list=products.filter(p=>(p.name+" "+p.description).toLowerCase().includes(q));
+ const sort=document.getElementById("sort").value;
+ if(sort==="low")list.sort((a,b)=>a.price-b.price);if(sort==="high")list.sort((a,b)=>b.price-a.price);
+ document.getElementById("productGrid").innerHTML=list.map(p=>`<article class="card"><img src="${p.image}" alt="${p.name}" onerror="this.style.opacity='.25';this.alt='Product image not found: ${p.image}'"><h3>${p.name}</h3><p>${p.description}</p><div class="price">₹${p.price}</div><button class="btn" onclick="addToCart(${p.id})">🛒 Add to Cart</button></article>`).join("")||'<p>No products found.</p>';
+}
+function addToCart(id){if(cart[id])cart[id].quantity++;else{let p=products.find(x=>x.id===id);cart[id]={...p,quantity:1};}updateCart(); }
+function changeQuantity(id,delta){if(!cart[id])return;cart[id].quantity+=delta;if(cart[id].quantity<=0)delete cart[id];updateCart();}
+function removeItem(id){delete cart[id];updateCart();}
+function clearCart(){cart={};updateCart();}
+function updateCart(){
+ let items=Object.values(cart),total=0,count=0;
+ document.getElementById("cartItems").innerHTML=items.length?items.map(p=>{let sub=p.price*p.quantity;total+=sub;count+=p.quantity;return `<div class="cart-row"><div><strong>${p.name}</strong><br><small>₹${p.price} each • Subtotal ₹${sub}</small></div><div class="qty"><button onclick="changeQuantity(${p.id},-1)">−</button> <strong>${p.quantity}</strong> <button onclick="changeQuantity(${p.id},1)">+</button></div><button class="remove" onclick="removeItem(${p.id})">Remove</button></div>`}).join(""):'<p class="cart-empty">Your cart is empty. Add earrings from the collection.</p>';
+ document.getElementById("total").textContent=total;document.getElementById("cartCount").textContent=count;updateCheckoutSummary();
+}
+function updateCheckoutSummary(){let items=Object.values(cart),total=items.reduce((s,p)=>s+p.price*p.quantity,0);document.getElementById("checkoutSummary").innerHTML=items.length?items.map(p=>`${p.name} × ${p.quantity} — ₹${p.price*p.quantity}`).join("<br>"):"Your cart is empty.";document.getElementById("checkoutTotal").textContent=total;}
+function scrollToCart(){document.getElementById("cart").scrollIntoView({behavior:"smooth"});}
+function proceedToCheckout(){if(!Object.keys(cart).length){alert("Your cart is empty. Please add products first.");return;}updateCheckoutSummary();document.getElementById("checkout").scrollIntoView({behavior:"smooth"});}
+document.getElementById("orderForm").addEventListener("submit",function(e){
+ e.preventDefault();if(!Object.keys(cart).length){alert("Your cart is empty. Please add products first.");return;}
+ let name=document.getElementById("customerName").value.trim(),mobile=document.getElementById("mobile").value.trim(),address=document.getElementById("address").value.trim(),payment=document.getElementById("payment").value,total=document.getElementById("total").textContent;
+ let lines=Object.values(cart).map(p=>`${p.name} × ${p.quantity} = ₹${p.price*p.quantity}`).join("\n");
+ let orderId="ST"+Date.now().toString().slice(-8);
+ document.getElementById("successNotice").style.display="block";
+ document.getElementById("successNotice").innerHTML=`<strong>Order placed successfully!</strong><br>Order ID: ${orderId}<br>Thank you, ${escapeHTML(name)}. Your order total is ₹${total}.`;
+ alert(`ORDER CONFIRMATION\nOrder ID: ${orderId}\nCustomer: ${name}\nMobile: ${mobile}\nProducts:\n${lines}\nTotal: ₹${total}\nAddress: ${address}\nPayment: ${payment}\n\nThank you for shopping at SAKTHI TRADERS!`);
+ clearCart();this.reset();document.getElementById("successNotice").scrollIntoView({behavior:"smooth",block:"center"});
+});
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+renderProducts();updateCart();
+</script>
+</body>
+</html>
